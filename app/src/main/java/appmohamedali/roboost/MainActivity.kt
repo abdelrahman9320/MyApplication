@@ -29,8 +29,8 @@ class MainActivity : ComponentActivity() {
 
         var drawable = ResourcesCompat.getDrawable(resources, R.drawable.flower1, null)
         processImage.setImageDrawable(drawable)
-        var bitmap: Bitmap = drawable!!.toBitmap(192,192)
-
+        var bitmap: Bitmap = drawable!!.toBitmap()
+        bitmap=Bitmap.createScaledBitmap(bitmap,192,192,true)
 
         btn.setOnClickListener {
 //            var labler = ImageLabeling.getClient(ImageLabelerOptions.DEFAULT_OPTIONS)
