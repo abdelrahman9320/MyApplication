@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingHorizontal="20dp">
+
+    <ImageView
+        android:id="@+id/processImage"
+        android:layout_width="wrap_content"
+        android:layout_height="439dp"
+        android:maxWidth="300dp"
+        android:maxHeight="100.dp"
+        android:src="@drawable/flower1" />
+
+    <Button
+        android:id="@+id/processingbtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="process" />
+
+    <TextView
+        android:id="@+id/imageLable"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingVertical="20dp"
+        android:text="TextView" />
+
+</LinearLayout>
