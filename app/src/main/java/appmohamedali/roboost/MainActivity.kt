@@ -27,7 +27,7 @@ class MainActivity : ComponentActivity() {
         val btn: Button = findViewById(R.id.processingbtn)
         var lable: TextView = findViewById(R.id.imageLable)
 
-        var drawable = ResourcesCompat.getDrawable(resources, R.drawable.flower3, null)
+        var drawable = ResourcesCompat.getDrawable(resources, R.drawable.flower1, null)
         processImage.setImageDrawable(drawable)
         var bitmap: Bitmap = drawable!!.toBitmap(192,192)
 
@@ -42,28 +42,7 @@ class MainActivity : ComponentActivity() {
 //                }
 //                lable.text = text
 //            }
-            val image=TensorImage.fromBitmap(bitmap)
-            val inputImage=TensorImage.createFrom(image,DataType.FLOAT32)
-            val model = Flowers.newInstance(this)
-            val flower= arrayListOf<String>("daisy", "dandelion", "roses", "sunflowers", "tulips")
-            var text = ""
-
-// Creates inputs for reference.
-            val inputFeature0 = TensorBuffer.createFixedSize(intArrayOf(1, 192, 192, 3), DataType.FLOAT32)
-            inputFeature0.loadBuffer(inputImage.buffer)
-
-// Runs model inference and gets result.
-            val outputs = model.process(inputFeature0)
-            val outputFeature0 = outputs.outputFeature0AsTensorBuffer
-            val percent=outputFeature0.floatArray
-
-// Releases model resources if no longer used.
-            model.close()
-            for (i in percent.indices) {
-                text += "${flower[i]}  ${percent[i]}\n"
-            }
-            lable.text = text
-
+           flowerLabeler(bitmap)
 
 
         }
@@ -72,6 +51,29 @@ class MainActivity : ComponentActivity() {
 
 
     fun flowerLabeler(bitmap:Bitmap){
+        val image=TensorImage.fromBitmap(bitmap)
+        val inputImage=TensorImage.createFrom(image,DataType.FLOAT32)
+        val model = Flowers.newInstance(this)
+        val flower= arrayListOf<String>("daisy", "dandelion", "roses", "sunflowers", "tulips")
+        var text = ""
+        val lable: TextView = findViewById(R.id.imageLable)
+
+// Creates inputs for reference.
+        val inputFeature0 = TensorBuffer.createFixedSize(intArrayOf(1, 192, 192, 3), DataType.FLOAT32)
+        inputFeature0.loadBuffer(inputImage.buffer)
+
+// Runs model inference and gets result.
+        val outputs = model.process(inputFeature0)
+        val outputFeature0 = outputs.outputFeature0AsTensorBuffer
+        val percent=outputFeature0.floatArray
+
+// Releases model resources if no longer used.
+        model.close()
+        for (i in flower.indices) {
+            text += "${flower[i]}  ${percent[i]}\n"
+        }
+        lable.text = text
+
 
     }
 
