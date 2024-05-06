@@ -9,7 +9,7 @@ import androidx.activity.ComponentActivity
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.graphics.drawable.toBitmap
 import androidx.core.view.drawToBitmap
-import appmohamedali.roboost.ml.Flowers
+import appmohamedali.roboost.ml.Flowers92
 import com.google.mlkit.vision.common.InputImage
 import com.google.mlkit.vision.label.ImageLabelerOptionsBase
 import com.google.mlkit.vision.label.ImageLabeling
@@ -27,7 +27,7 @@ class MainActivity : ComponentActivity() {
         val btn: Button = findViewById(R.id.processingbtn)
         var lable: TextView = findViewById(R.id.imageLable)
 
-        var drawable = ResourcesCompat.getDrawable(resources, R.drawable.flower1, null)
+        var drawable = ResourcesCompat.getDrawable(resources, R.drawable.flower4, null)
         processImage.setImageDrawable(drawable)
         var bitmap: Bitmap = drawable!!.toBitmap()
         bitmap=Bitmap.createScaledBitmap(bitmap,192,192,true)
@@ -53,7 +53,7 @@ class MainActivity : ComponentActivity() {
     fun flowerLabeler(bitmap:Bitmap){
         val image=TensorImage.fromBitmap(bitmap)
         val inputImage=TensorImage.createFrom(image,DataType.FLOAT32)
-        val model = Flowers.newInstance(this)
+        val model = Flowers92.newInstance(this)
         val flower= arrayListOf<String>("daisy", "dandelion", "roses", "sunflowers", "tulips")
         var text = ""
         val lable: TextView = findViewById(R.id.imageLable)
